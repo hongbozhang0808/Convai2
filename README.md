@@ -16,13 +16,19 @@ Team info
   * team name: team PAT
   * model name: topicSeq2seq
 
-Evaluation file
+Evaluation files
 -------
   * projects/convai2/s2s_vae/eval_f1.py (15.54 on valid_self_revised_no_cands.txt)
   * projects/convai2/s2s_vae/eval_ppl.py (50.37 on valid_self_revised_no_cands.txt)
  
-Model file
+Model files
 -------
   * the pretrained model files are in data/models/convai2/, including three models.
   * the compressed files in data/models/convai2/seq2seq-model/* must be uncompressed at first, and the uncompressed file should be constructed as data/models/convai2/seq2seq-model/weights_s2s_v1_3_7_5.hdf5
   
+Modified files
+--------
+  * these files have been modified, including:
+  * Convai2/projects/convai2/eval_ppl.py
+  * Convai2/parlai/tasks/convai2/agents.py
+  * Convai2/projects/convai2/eval_f1.py
