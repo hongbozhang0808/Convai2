@@ -17,5 +17,5 @@ Team info
 
 Evaluation file
 -------
-  * projects/convai2/s2s_vae/eval_f1.py (16.58 on valid_self_original_no_cands.txt)
+  * projects/convai2/convai2_keras/eval_f1.py (16.58 on valid_self_original_no_cands.txt)
  
