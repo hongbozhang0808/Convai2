@@ -7,8 +7,6 @@ Dependencies:
   * python ( 3.5.2 )
   * keras ( 2.1.5 )
   * tensorflow ( 1.3.0 )
-  * gensim（ 3.2.0 ）
-  * nltk（ 3.2.1 ）
 
 Team info
 -------
