@@ -6,14 +6,13 @@
 
 import torch
 import torch.nn as nn
-from torch.autograd import Variable
 from torch.nn.functional import softmax
 
 from functools import lru_cache
 
 
 class MemNN(nn.Module):
-    def __init__(self, opt, num_features):
+    def __init__(self, opt, num_features, use_cuda=False):
         super().__init__()
         self.opt = opt
 
@@ -38,9 +37,10 @@ class MemNN(nn.Module):
 
         self.score = DotScore()
 
-        if opt['cuda']:
+        if use_cuda:
             self.score.cuda()
             self.memory_hop.cuda()
+        self.use_cuda = use_cuda
 
     def time_feature(self, t):
         return self.time_features[min(t, self.num_time_features - 1)]
@@ -72,9 +72,9 @@ class MemNN(nn.Module):
         in_memory_embeddings = self.in_memory_embedder(memory_lengths, memories)
         out_memory_embeddings = self.out_memory_embedder(memory_lengths, memories)
         query_embeddings = self.query_embedder(query_lengths, queries)
-        attention_mask = Variable(memory_lengths.data.ne(0), requires_grad=False)
+        attention_mask = memory_lengths.data.ne(0).detach()
 
-        if self.opt['cuda']:
+        if self.use_cuda:
             in_memory_embeddings = in_memory_embeddings.cuda()
             out_memory_embeddings = out_memory_embeddings.cuda()
             query_embeddings = query_embeddings.cuda()
@@ -93,9 +93,8 @@ class Embed(nn.Embedding):
 
     def forward(self, lengths, indices):
         lengths_mat = lengths.data
-        indices = indices.data
         if lengths.dim() == 1 or lengths.size(1) == 1:
-            lengths_mat = lengths_mat.squeeze().unsqueeze(0)
+            lengths_mat = lengths_mat.unsqueeze(0)
 
         if lengths_mat.dim() == 1:
             raise RuntimeError(lengths.shape)
@@ -107,17 +106,18 @@ class Embed(nn.Embedding):
         offset = 0
         for i, row in enumerate(lengths_mat):
             for j, length in enumerate(row):
+                length = length.item()
                 if length > 0:
-                    input[i, j, :length] = indices[offset:offset+length]
+                    input[i, j, :length] = indices[offset:offset + length]
                 offset += length
-        input = Variable(input)
 
         for i, row in enumerate(lengths_mat):
             emb = super().forward(input[i, :, :])
             if self.position_encoding:
-                emb = emb * Variable(self.position_tensor(row, emb))
+                emb = emb * self.position_tensor(row, emb)
             emb = torch.sum(emb, dim=1).squeeze(1)
             for j, length in enumerate(row):
+                length = length.item()
                 if length > 0:
                     emb[j] /= length
             emb_list.append(emb)
@@ -133,9 +133,9 @@ class Embed(nn.Embedding):
     @lru_cache(maxsize=32)
     def position_matrix(J, d):
         m = torch.Tensor(J, d)
-        for k in range(1, d+1):
-            for j in range(1, J+1):
-                m[j-1, k-1] = (1 - j/J) - (k/d) * (1 - 2 * j/J)
+        for k in range(1, d + 1):
+            for j in range(1, J + 1):
+                m[j - 1, k - 1] = (1 - j / J) - (k / d) * (1 - 2 * j / J)
         return m
 
     @staticmethod
@@ -159,7 +159,7 @@ class Hop(nn.Module):
         if attention_mask is not None:
             # exclude masked elements from the softmax
             attention = attention_mask.float() * attention + (1 - attention_mask.float()) * -1e20
-        probs = softmax(attention).unsqueeze(1)
+        probs = softmax(attention, dim=1).unsqueeze(1)
         memory_output = torch.bmm(probs, out_memory_embeddings).squeeze(1)
         query_embeddings = self.linear(query_embeddings)
         output = memory_output + query_embeddings
@@ -183,6 +183,7 @@ class Decoder(nn.Module):
         if dropout:
             scores = self.dropout(scores)
         _, idx = scores.max(1)
+        idx.unsqueeze_(1)
         return idx, scores
 
     def forward(self, input, state):

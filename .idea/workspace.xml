@@ -1,0 +1,645 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e0a0c1f1-3a4d-4d7c-bc20-28cabbf91ccc" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/models/convai2/new_dict_original.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/models/convai2/new_dict_original.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/generate_task_list.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/generate_task_list.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/index.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/tasks.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/tasks.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/tutorial_basic.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/tutorial_basic.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/tutorial_messenger.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/tutorial_messenger.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/tutorial_mturk.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/tutorial_mturk.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/tutorial_task.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/tutorial_task.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/tutorial_worlds.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/tutorial_worlds.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/examples/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/base_train.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples/base_train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/build_pytorch_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples/build_pytorch_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/display_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples/display_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/display_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples/display_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/interactive.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples/interactive.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/memnn_luatorch_cpu/full_task_train.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples/memnn_luatorch_cpu/full_task_train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/remote.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples/remote.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/convai2_keras/attention_seq2seq_v1_2_f1_ppl.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/convai2_keras/attention_seq2seq_v1_2_f1_ppl.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/convai2_keras/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/convai2_keras/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/coopgame_agent/coopgame_agent.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/coopgame_agent/coopgame_agent.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/drqa/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/drqa/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/drqa/drqa.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/drqa/drqa.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/drqa/layers.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/drqa/layers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/drqa/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/drqa/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/drqa/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/drqa/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/example_seq2seq/example_seq2seq.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/example_seq2seq/example_seq2seq.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/fairseq/fairseq.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/fairseq/fairseq.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/ibm_seq2seq/ibm_seq2seq.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/ibm_seq2seq/ibm_seq2seq.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/ir_baseline/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/ir_baseline/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/ir_baseline/ir_baseline.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/ir_baseline/ir_baseline.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/language_model/language_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/language_model/language_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/language_model/modules.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/language_model/modules.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/local_human/local_human.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/local_human/local_human.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/memnn/memnn.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/memnn/memnn.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/memnn/modules.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/memnn/modules.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/memnn_luatorch_cpu/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/memnn_luatorch_cpu/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/mlb_vqa/dropout.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/mlb_vqa/dropout.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/mlb_vqa/gru.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/mlb_vqa/gru.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/mlb_vqa/loadstates.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/mlb_vqa/loadstates.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/mlb_vqa/mlb_modules.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/mlb_vqa/mlb_modules.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/mlb_vqa/mlb_vqa.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/mlb_vqa/mlb_vqa.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/remote_agent/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/remote_agent/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/remote_agent/remote_agent.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/remote_agent/remote_agent.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/repeat_label/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/repeat_label/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/repeat_label/repeat_label.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/repeat_label/repeat_label.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/repeat_query/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/repeat_query/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/repeat_query/repeat_query.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/repeat_query/repeat_query.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/seq2seq/modules.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/seq2seq/modules.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/seq2seq/seq2seq.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/seq2seq/seq2seq.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/starspace/modules.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/starspace/modules.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/starspace/starspace.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/starspace/starspace.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/tfidf_retriever/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/tfidf_retriever/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/tfidf_retriever/build_db.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/tfidf_retriever/build_db.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/tfidf_retriever/build_tfidf.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/tfidf_retriever/build_tfidf.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/tfidf_retriever/doc_db.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/tfidf_retriever/doc_db.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/tfidf_retriever/tfidf_doc_ranker.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/tfidf_retriever/tfidf_doc_ranker.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/tfidf_retriever/tfidf_retriever.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/tfidf_retriever/tfidf_retriever.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/tfidf_retriever/tokenizers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/tfidf_retriever/tokenizers/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/agents/tfidf_retriever/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/agents/tfidf_retriever/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/core/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/core/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/core/agents.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/core/agents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/core/build_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/core/build_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/core/dict.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/core/dict.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/core/image_featurizers.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/core/image_featurizers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/core/metrics.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/core/metrics.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/core/params.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/core/params.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/core/pytorch_data_teacher.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/core/pytorch_data_teacher.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/core/teachers.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/core/teachers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/core/thread_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/core/thread_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/core/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/core/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/core/worlds.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/core/worlds.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/messenger/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/messenger/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/messenger/core/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/messenger/core/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/messenger/core/agents.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/messenger/core/agents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/messenger/core/message_sender.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/messenger/core/message_sender.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/messenger/core/messenger_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/messenger/core/messenger_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/messenger/core/server/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/messenger/core/server/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/messenger/core/server_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/messenger/core/server_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/messenger/core/shared_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/messenger/core/shared_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/messenger/tasks/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/messenger/tasks/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/messenger/tasks/chatbot/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/messenger/tasks/chatbot/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/messenger/tasks/chatbot/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/messenger/tasks/chatbot/run.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/messenger/tasks/chatbot/worlds.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/messenger/tasks/chatbot/worlds.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/messenger/tasks/overworld_demo/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/messenger/tasks/overworld_demo/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/messenger/tasks/overworld_demo/worlds.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/messenger/tasks/overworld_demo/worlds.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/messenger/tasks/qa_data_collection/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/messenger/tasks/qa_data_collection/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/core/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/core/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/core/agents.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/core/agents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/core/mturk_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/core/mturk_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/core/mturk_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/core/mturk_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/core/scripts/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/core/scripts/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/core/scripts/bonus_workers.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/core/scripts/bonus_workers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/core/scripts/delete_hits.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/core/scripts/delete_hits.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/core/server/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/core/server/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/core/server/html/core.html" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/core/server/html/core.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/core/server/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/core/server/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/core/server_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/core/server_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/core/shared_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/core/shared_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/core/socket_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/core/socket_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/core/test/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/core/test/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/core/test/auto_complete_hit.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/core/test/auto_complete_hit.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/tasks/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/tasks/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/tasks/data_evaluator/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/tasks/data_evaluator/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/tasks/dealnodeal/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/tasks/dealnodeal/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/tasks/dealnodeal/task_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/tasks/dealnodeal/task_config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/tasks/dealnodeal/worlds.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/tasks/dealnodeal/worlds.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/tasks/model_evaluator/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/tasks/model_evaluator/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/tasks/model_evaluator/task_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/tasks/model_evaluator/task_config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/tasks/multi_agent_dialog/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/tasks/multi_agent_dialog/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/tasks/multi_agent_dialog/task_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/tasks/multi_agent_dialog/task_config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/tasks/personachat/personachat_chat/extract_and_save_personas.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/tasks/personachat/personachat_chat/extract_and_save_personas.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/tasks/personachat/personachat_chat/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/tasks/personachat/personachat_chat/run.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/tasks/personachat/personachat_chat/worlds.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/tasks/personachat/personachat_chat/worlds.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/tasks/personachat/personachat_collect_personas/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/tasks/personachat/personachat_collect_personas/run.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/tasks/personachat/personachat_collect_personas/task_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/tasks/personachat/personachat_collect_personas/task_config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/tasks/personachat/personachat_collect_personas/worlds.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/tasks/personachat/personachat_collect_personas/worlds.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/tasks/personachat/personachat_rephrase/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/tasks/personachat/personachat_rephrase/run.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/tasks/personachat/personachat_rephrase/worlds.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/tasks/personachat/personachat_rephrase/worlds.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/tasks/qa_data_collection/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/tasks/qa_data_collection/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/tasks/qa_data_collection/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/tasks/qa_data_collection/run.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/tasks/qa_data_collection/task_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/tasks/qa_data_collection/task_config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/tasks/qualification_flow_example/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/tasks/qualification_flow_example/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/mturk/tasks/qualification_flow_example/worlds.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/mturk/tasks/qualification_flow_example/worlds.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/scripts/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/scripts/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/scripts/build_dict.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/scripts/build_dict.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/scripts/build_pytorch_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/scripts/build_pytorch_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/scripts/eval_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/scripts/eval_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/scripts/eval_ppl.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/scripts/eval_ppl.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/scripts/extract_image_feature.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/scripts/extract_image_feature.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/scripts/interactive.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/scripts/interactive.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/scripts/profile_train.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/scripts/profile_train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/scripts/train_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/scripts/train_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/aqua/agents.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/aqua/agents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/babi/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/babi/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/babi/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/babi/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/booktest/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/booktest/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/booktest/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/booktest/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/cbt/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/cbt/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/cbt/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/cbt/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/clevr/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/clevr/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/clevr/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/clevr/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/convai2/agents.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/convai2/agents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/convai2/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/convai2/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/convai_chitchat/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/convai_chitchat/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/cornell_movie/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/cornell_movie/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/cornell_movie/agents.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/cornell_movie/agents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/cornell_movie/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/cornell_movie/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/dbll_babi/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/dbll_babi/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/dbll_babi/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/dbll_babi/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/dbll_movie/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/dbll_movie/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/dbll_movie/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/dbll_movie/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/dealnodeal/agents.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/dealnodeal/agents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/dealnodeal/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/dealnodeal/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/dialog_babi/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/dialog_babi/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/dialog_babi/agents.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/dialog_babi/agents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/dialog_babi/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/dialog_babi/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/dialog_babi_plus/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/dialog_babi_plus/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/dialog_babi_plus/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/dialog_babi_plus/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/fromfile/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/fromfile/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/fromfile/agents.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/fromfile/agents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/fvqa/agents.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/fvqa/agents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/fvqa/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/fvqa/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/insuranceqa/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/insuranceqa/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/iwslt14/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/iwslt14/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/mctest/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/mctest/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/mctest/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/mctest/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/mnist_qa/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/mnist_qa/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/mnist_qa/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/mnist_qa/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/moviedialog/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/moviedialog/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/moviedialog/agents.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/moviedialog/agents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/moviedialog/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/moviedialog/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/ms_marco/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/ms_marco/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/mturkwikimovies/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/mturkwikimovies/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/mturkwikimovies/agents.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/mturkwikimovies/agents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/mturkwikimovies/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/mturkwikimovies/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/mutualfriends/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/mutualfriends/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/mutualfriends/agents.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/mutualfriends/agents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/narrative_qa/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/narrative_qa/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/nlvr/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/nlvr/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/nlvr/agents.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/nlvr/agents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/nlvr/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/nlvr/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/opensubtitles/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/opensubtitles/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/opensubtitles/agents.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/opensubtitles/agents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/opensubtitles/build_2009.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/opensubtitles/build_2009.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/opensubtitles/build_2018.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/opensubtitles/build_2018.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/personachat/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/personachat/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/personachat/agents.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/personachat/agents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/personachat/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/personachat/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/personalized_dialog/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/personalized_dialog/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/personalized_dialog/agents.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/personalized_dialog/agents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/qacnn/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/qacnn/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/qacnn/agents.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/qacnn/agents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/qadailymail/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/qadailymail/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/qadailymail/agents.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/qadailymail/agents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/scan/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/scan/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/scan/agents.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/scan/agents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/scan/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/scan/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/simplequestions/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/simplequestions/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/simplequestions/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/simplequestions/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/snli/agents.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/snli/agents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/squad/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/squad/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/squad/agents.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/squad/agents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/squad/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/squad/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/task_list.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/task_list.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/tasks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/triviaqa/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/triviaqa/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/triviaqa/agents.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/triviaqa/agents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/twitter/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/twitter/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/twitter/agents.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/twitter/agents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/twitter/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/twitter/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/ubuntu/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/ubuntu/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/visdial/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/visdial/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/vqa_v1/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/vqa_v1/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/vqa_v1/agents.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/vqa_v1/agents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/vqa_v1/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/vqa_v1/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/vqa_v2/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/vqa_v2/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/vqa_v2/agents.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/vqa_v2/agents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/vqa_v2/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/vqa_v2/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/webquestions/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/webquestions/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/webquestions/agents.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/webquestions/agents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/wikimovies/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/wikimovies/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/wikimovies/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/wikimovies/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/wikipedia/agents.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/wikipedia/agents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/wikipedia/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/wikipedia/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/wikiqa/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/wikiqa/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/wikiqa/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/wikiqa/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/wmt/agents.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/wmt/agents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parlai/tasks/wmt/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/parlai/tasks/wmt/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/convai/convai_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/convai/convai_bot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/convai/convai_world.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/convai/convai_world.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/convai2/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/projects/convai2/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/convai2/baselines/kvmemnn/interactive.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/convai2/baselines/kvmemnn/interactive.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/convai2/baselines/kvmemnn/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/convai2/baselines/kvmemnn/train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/convai2/baselines/language_model/eval_f1.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/convai2/baselines/language_model/eval_f1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/convai2/baselines/language_model/eval_ppl.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/convai2/baselines/language_model/eval_ppl.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/convai2/baselines/seq2seq/eval_f1.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/convai2/baselines/seq2seq/eval_f1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/convai2/baselines/seq2seq/eval_hits.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/convai2/baselines/seq2seq/eval_hits.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/convai2/baselines/seq2seq/eval_ppl.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/convai2/baselines/seq2seq/eval_ppl.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/convai2/baselines/seq2seq/interactive.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/convai2/baselines/seq2seq/interactive.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/convai2/baselines/seq2seq/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/convai2/baselines/seq2seq/train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/convai2/build_dict.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/convai2/build_dict.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/convai2/convai2_keras/eval_f1.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/convai2/convai2_keras/eval_f1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/convai2/eval_f1.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/convai2/eval_f1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/convai2/eval_hits.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/convai2/eval_hits.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/convai2/eval_ppl.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/convai2/eval_ppl.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/mastering_the_dungeon/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/projects/mastering_the_dungeon/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/mastering_the_dungeon/agents/graph_world2/agents.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/mastering_the_dungeon/agents/graph_world2/agents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/mastering_the_dungeon/agents/graph_world2/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/mastering_the_dungeon/agents/graph_world2/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/mastering_the_dungeon/mturk/tasks/MTD/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/mastering_the_dungeon/mturk/tasks/MTD/run.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/mastering_the_dungeon/projects/graph_world2/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/mastering_the_dungeon/projects/graph_world2/train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/mastering_the_dungeon/tasks/graph_world2/agents.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/mastering_the_dungeon/tasks/graph_world2/agents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/mastering_the_dungeon/tasks/graph_world2/graph.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/mastering_the_dungeon/tasks/graph_world2/graph.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/mastering_the_dungeon/tasks/graph_world2/worlds.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/mastering_the_dungeon/tasks/graph_world2/worlds.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/memnn_feedback/agent/modules.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/memnn_feedback/agent/modules.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/memnn_feedback/tasks/dbll_babi/agents.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/memnn_feedback/tasks/dbll_babi/agents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/memnn_feedback/tasks/dbll_babi/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/memnn_feedback/tasks/dbll_babi/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/personachat/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/projects/personachat/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/personachat/kvmemnn/kvmemnn.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/personachat/kvmemnn/kvmemnn.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/personachat/kvmemnn/modules.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/personachat/kvmemnn/modules.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/personachat/mturk/personachat_eval/extract_and_save_personas.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/personachat/mturk/personachat_eval/extract_and_save_personas.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/personachat/mturk/personachat_eval/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/personachat/mturk/personachat_eval/run.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/personachat/mturk/personachat_eval/worlds.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/personachat/mturk/personachat_eval/worlds.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/personachat/persona_seq2seq.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/personachat/persona_seq2seq.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/personachat/scripts/kvmemnn_interactive.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/personachat/scripts/kvmemnn_interactive.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/personachat/scripts/languagemodel_opensub2018_interactive.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/personachat/scripts/languagemodel_opensub2018_interactive.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/run_tests_short.sh" beforeDir="false" afterPath="$PROJECT_DIR$/tests/run_tests_short.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/tasks/repeat.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tasks/repeat.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_display_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_display_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_downloads.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_downloads.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_eval_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_eval_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_hogwild.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_hogwild.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_import.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_import.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_init.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_init.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_mlb_vqa.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_mlb_vqa.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_tasklist.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_tasklist.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_tfidf_retriever.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_tfidf_retriever.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_threadutils.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_threadutils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_train_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_train_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_utils.py" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="new_dict_original.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/models/convai2/new_dict_original.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="6" selection-start-column="6" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="attention_seq2seq_v1_2_f1_ppl.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/parlai/agents/convai2_keras/attention_seq2seq_v1_2_f1_ppl.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="280">
+              <caret line="244" column="50" selection-start-line="244" selection-start-column="48" selection-end-line="244" selection-end-column="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SCN.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/parlai/agents/convai2_keras/SCN.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="291">
+              <caret line="253" column="26" selection-start-line="253" selection-start-column="24" selection-end-line="253" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="utils.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/parlai/agents/convai2_keras/utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="258">
+              <caret line="164" column="27" selection-start-line="164" selection-start-column="27" selection-end-line="164" selection-end-column="27" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="eval_f1.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/projects/convai2/convai2_keras/eval_f1.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="13">
+              <caret line="10" selection-start-line="10" selection-end-line="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="eval_f1.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/projects/convai2/eval_f1.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="81">
+              <caret line="10" selection-start-line="10" selection-end-line="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="metrics.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/parlai/core/metrics.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="83">
+              <caret line="4" column="24" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
+              <folding>
+                <element signature="e#450#498#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dict.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/parlai/core/dict.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1306">
+              <caret line="23" column="25" lean-forward="true" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
+              <folding>
+                <element signature="e#363#411#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>__</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/data/models/convai2/new_dict_original.txt" />
+        <option value="$PROJECT_DIR$/parlai/agents/convai2_keras/attention_seq2seq_v1_2_f1_ppl.py" />
+        <option value="$PROJECT_DIR$/parlai/agents/convai2_keras/utils.py" />
+        <option value="$PROJECT_DIR$/data/ConvAI2/valid_self_original_no_cands.txt" />
+        <option value="$PROJECT_DIR$/projects/convai2/convai2_keras/eval_f1.py" />
+        <option value="$PROJECT_DIR$/parlai/core/metrics.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-212" />
+    <option name="y" value="-8" />
+    <option name="width" value="1400" />
+    <option name="height" value="1000" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Convai2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Convai2" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Convai2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Convai2" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Convai2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Convai2" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="ConvAI2" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Convai2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Convai2" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Convai2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Convai2" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+              <item name="convai2" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Convai2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Convai2" type="462c0819:PsiDirectoryNode" />
+              <item name="parlai" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Convai2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Convai2" type="462c0819:PsiDirectoryNode" />
+              <item name="parlai" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Convai2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Convai2" type="462c0819:PsiDirectoryNode" />
+              <item name="projects" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Convai2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Convai2" type="462c0819:PsiDirectoryNode" />
+              <item name="projects" type="462c0819:PsiDirectoryNode" />
+              <item name="convai2" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Convai2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Convai2" type="462c0819:PsiDirectoryNode" />
+              <item name="projects" type="462c0819:PsiDirectoryNode" />
+              <item name="convai2" type="462c0819:PsiDirectoryNode" />
+              <item name="convai2_keras" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\dabo\challenges\Convai2\online1\Convai2\data\ConvAI2" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="eval_f1" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Convai2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/projects/convai2/convai2_keras" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/projects/convai2/convai2_keras/eval_f1.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.eval_f1" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e0a0c1f1-3a4d-4d7c-bc20-28cabbf91ccc" name="Default" comment="" />
+      <created>1535445058592</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1535445058592</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20969442" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32900432" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Python Console" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/data/ConvAI2/valid_self_original_no_cands.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/ConvAI2/valid_self_original_no_cands.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="6" column="101" selection-start-line="6" selection-start-column="101" selection-end-line="6" selection-end-column="101" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/models/convai2/new_dict_original.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="6" selection-start-column="6" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/parlai/agents/convai2_keras/attention_seq2seq_v1_2_f1_ppl.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="244" column="50" selection-start-line="244" selection-start-column="48" selection-end-line="244" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/parlai/agents/convai2_keras/SCN.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="253" column="26" selection-start-line="253" selection-start-column="24" selection-end-line="253" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/parlai/agents/convai2_keras/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="164" column="27" selection-start-line="164" selection-start-column="27" selection-end-line="164" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/convai2/convai2_keras/eval_f1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="13">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/convai2/eval_f1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="81">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/parlai/core/metrics.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="83">
+          <caret line="4" column="24" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
+          <folding>
+            <element signature="e#450#498#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/parlai/core/dict.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1306">
+          <caret line="23" column="25" lean-forward="true" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
+          <folding>
+            <element signature="e#363#411#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

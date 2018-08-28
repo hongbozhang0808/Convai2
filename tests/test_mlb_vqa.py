@@ -18,16 +18,14 @@ class TestTrainModel(unittest.TestCase):
         f = io.StringIO()
         with redirect_stdout(f):
             try:
-                import torch
+                import torch  # noqa: F401
             except ImportError:
                 print('Cannot import torch, skipping test_train_model')
                 return
             parser = setup_args()
             parser.set_defaults(
                 model='mlb_vqa',
-                task='pytorch_teacher',
-                pytorch_buildteacher='vqa_v1',
-                dataset='parlai.tasks.vqa_v1.agents',
+                pytorch_teacher_dataset='vqa_v1',
                 image_mode='resnet152_spatial',
                 image_size=448,
                 image_cropsize=448,
@@ -35,7 +33,7 @@ class TestTrainModel(unittest.TestCase):
                 batchsize=1,
                 num_epochs=1,
                 no_cuda=True,
-                no_hdf5=True,
+                use_hdf5=False,
                 pytorch_preprocess=False,
                 batch_sort_cache='none',
                 numworkers=1,
@@ -49,12 +47,13 @@ class TestTrainModel(unittest.TestCase):
                         "Did not reach training step")
         self.assertTrue("[ running eval: valid ]" in str_output,
                         "Did not reach validation step")
-        self.assertTrue("valid:{'total': 10," in str_output,
+        self.assertTrue("valid:{'exs': 10," in str_output,
                         "Did not complete validation")
         self.assertTrue("[ running eval: test ]" in str_output,
                         "Did not reach evaluation step")
-        self.assertTrue("test:{'total': 0}" in str_output,
+        self.assertTrue("test:{'exs': 0}" in str_output,
                         "Did not complete evaluation")
+
 
 if __name__ == '__main__':
     unittest.main()

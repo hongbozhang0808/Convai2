@@ -35,6 +35,7 @@ class MessengerAgent(Agent):
             resp = self.manager.observe_payload(
                 self.id,
                 act['payload'],
+                act.get('quick_replies', None),
             )
         else:
             if act['id'] != '':
@@ -43,7 +44,7 @@ class MessengerAgent(Agent):
                 msg = act['text']
             resp = self.manager.observe_message(
                 self.id, msg,
-                act.get('quick_replies', None)
+                act.get('quick_replies', None),
             )
         try:
             mid = resp[0]['message_id']
@@ -56,12 +57,12 @@ class MessengerAgent(Agent):
 
     def observe_typing_on(self):
         """Allow agent to observe typing indicator"""
-        self.manager.message_socket.typing_on(self.id)
+        self.manager.message_sender.typing_on(self.id)
 
     def put_data(self, message):
         """Put data into the message queue if it hasn't already been seen"""
         mid = message['message']['mid']
-        seq = message['message']['seq']
+        seq = message['message'].get('seq', None)
         if 'text' not in message['message']:
             print('Msg: {} could not be extracted to text format'.format(
                 message['message']))

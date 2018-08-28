@@ -34,7 +34,7 @@ class DocReaderModel(object):
         if state_dict:
             new_state = set(self.network.state_dict().keys())
             for k in list(state_dict['network'].keys()):
-                if not k in new_state:
+                if k not in new_state:
                     del state_dict['network'][k]
             self.network.load_state_dict(state_dict['network'])
 
@@ -138,6 +138,7 @@ class DocReaderModel(object):
         text = ex[-2]
         spans = ex[-1]
         predictions = []
+        pred_scores = []
         max_len = self.opt['max_len'] or score_s.size(1)
         for i in range(score_s.size(0)):
             scores = torch.ger(score_s[i], score_e[i])
@@ -146,8 +147,9 @@ class DocReaderModel(object):
             s_idx, e_idx = np.unravel_index(np.argmax(scores), scores.shape)
             s_offset, e_offset = spans[i][s_idx][0], spans[i][e_idx][1]
             predictions.append(text[i][s_offset:e_offset])
+            pred_scores.append(np.max(scores))
 
-        return predictions
+        return predictions, pred_scores
 
     def reset_parameters(self):
         # Reset fixed embeddings to original value

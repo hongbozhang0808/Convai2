@@ -11,7 +11,10 @@ import unicodedata
 import numpy as np
 import scipy.sparse as sp
 from sklearn.utils import murmurhash3_32
-import torch
+try:
+    import torch
+except ImportError as e:
+    raise ImportError('Need to install Pytorch: go to pytorch.org')
 
 
 # ------------------------------------------------------------------------------
@@ -29,6 +32,7 @@ def save_sparse_csr(filename, matrix, metadata=None):
     }
     np.savez(filename, **data)
 
+
 def save_sparse_tensor(filename, matrix, metadata=None):
     data = {
         'indices': matrix._indices(),
@@ -44,6 +48,7 @@ def load_sparse_csr(filename):
     matrix = sp.csr_matrix((loader['data'], loader['indices'],
                             loader['indptr']), shape=loader['shape'])
     return matrix, loader['metadata'].item(0) if 'metadata' in loader else None
+
 
 def load_sparse_tensor(filename):
     loader = torch.load(filename)

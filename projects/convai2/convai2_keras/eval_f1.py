@@ -14,18 +14,18 @@ import os
 # from pycallgraph import Config
 # from pycallgraph.output import GraphvizOutput
 
-
 if __name__ == '__main__':
     parser = setup_args()
     parser.set_defaults(
         model='parlai.agents.convai2_keras.attention_seq2seq_v1_2_f1_ppl:AttentionSeq2seqAgent',
-        model_file='models:convai2\\attentionSeq2seq_v1.2_weights_only.hdf5',
-        dict_file='models:convai2\\new_dict_original.txt',
+        model_file='models:convai2/attentionSeq2seq_v1.2_weights_only.hdf5',
+        dict_file='models:convai2/new_dict_original.txt',
         word_embedding_size = 300,
         embedding_file = '',
         batchsize=256,
         hiddensize=512,
-        persona_select_model_file='models\convai2\persona_select_model_v1_2_shuffle'
+        persona_select_model_file='models/convai2/persona_select_model_v1_2_shuffle',
+        batch_sort=True
     )
     opt = parser.parse_args(print_args=False)
     opt['persona_select_model_file'] = os.path.join(opt['datapath'], opt['persona_select_model_file'])

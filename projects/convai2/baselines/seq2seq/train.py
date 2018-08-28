@@ -17,12 +17,11 @@ if __name__ == '__main__':
         task='convai2:self',
         model='seq2seq',
         model_file='/tmp/convai2_self_seq2seq_model',
-        dict_file='/tmp/dict_convai2_self',
         dict_lower=True,
-        dict_include_valid=True,
+        dict_include_valid=False,
         dict_maxexs=-1,
         datatype='train',
-        batchsize=128,
+        batchsize=64,
         hiddensize=1024,
         embeddingsize=256,
         attention='general',
@@ -42,5 +41,6 @@ if __name__ == '__main__':
         validation_metric_mode='min',
         validation_patience=12,
         log_every_n_secs=10,
+        dict_tokenizer='split',
     )
     TrainLoop(parser).train()

@@ -4,7 +4,8 @@
 # LICENSE file in the root directory of this source tree. An additional grant
 # of patent rights can be found in the PATENTS file in the same directory.
 
-from parlai.core.worlds import World, display_messages
+from parlai.core.worlds import World
+from parlai.core.utils import display_messages
 from parlai.core.agents import create_agent_from_shared
 
 import requests
@@ -64,7 +65,7 @@ class ConvAIWorld(World):
         # The maximum number of open dialogs. Use -1 for unlimited number of open dialogs
         self.bot_capacity = opt['bot_capacity']
         # RouterBot url with current bot id
-        self.bot_url = self.router_bot_url + '/' + self.bot_id
+        self.bot_url = self.router_bot_url + self.bot_id
 
     def _get_updates(self):
         """Make HTTP request to Router Bot for new messages

@@ -12,26 +12,30 @@ In Association for Computational Linguistics (ACL).
 Link: https://arxiv.org/abs/1704.00051
 
 Note:
-To use pretrained word embeddings, set the --embeddings_file path argument.
+To use pretrained word embeddings, set the --embedding_file path argument.
 GloVe is recommended, see http://nlp.stanford.edu/data/glove.840B.300d.zip.
+To automatically download glove, use:
+--embedding_file models:glove_vectors/glove.840B.300d.txt
 """
 
 try:
     import torch
-except ModuleNotFoundError:
-    raise ModuleNotFoundError('Need to install pytorch: go to pytorch.org')
+except ImportError:
+    raise ImportError('Need to install pytorch: go to pytorch.org')
 
 import bisect
 import os
 import numpy as np
-import copy
+import pickle
 import random
 
 from parlai.core.agents import Agent
 from parlai.core.dict import DictionaryAgent
+from parlai.core.build_data import modelzoo_path
 from . import config
 from .utils import build_feature_dict, vectorize, batchify, normalize_text
 from .model import DocReaderModel
+
 
 # ------------------------------------------------------------------------------
 # Dictionary.
@@ -53,9 +57,12 @@ class SimpleDictionaryAgent(DictionaryAgent):
         super().__init__(*args, **kwargs)
 
         # Index words in embedding file
-        if self.opt['pretrained_words'] and self.opt.get('embedding_file'):
+        if (self.opt['pretrained_words'] and self.opt.get('embedding_file') and
+                not self.opt.get('trained', False)):
             print('[ Indexing words with embeddings... ]')
             self.embedding_words = set()
+            self.opt['embedding_file'] = modelzoo_path(
+                self.opt.get('datapath'), self.opt['embedding_file'])
             with open(self.opt['embedding_file']) as f:
                 for line in f:
                     w = normalize_text(line.rstrip().split(' ')[0])
@@ -70,8 +77,7 @@ class SimpleDictionaryAgent(DictionaryAgent):
         Only adds words contained in self.embedding_words, if not None.
         """
         for token in tokens:
-            if (self.embedding_words is not None and
-                token not in self.embedding_words):
+            if (self.embedding_words is not None and token not in self.embedding_words):
                 continue
             self.freq[token] += 1
             if token not in self.tok2ind:
@@ -97,39 +103,38 @@ class DrqaAgent(Agent):
         return SimpleDictionaryAgent
 
     def __init__(self, opt, shared=None):
-        if opt['numthreads'] > 1:
+        if opt.get('numthreads', 1) > 1:
             raise RuntimeError("numthreads > 1 not supported for this model.")
+        super().__init__(opt, shared)
 
-        # Load dict.
-        if not shared:
-            word_dict = DrqaAgent.dictionary_class()(opt)
         # All agents keep track of the episode (for multiple questions)
         self.episode_done = True
 
-        # Only create an empty dummy class when sharing
+        self.opt['cuda'] = not self.opt['no_cuda'] and torch.cuda.is_available()
+
         if shared is not None:
-            self.is_shared = True
-            return
+            # model has already been set up
+            self.word_dict = shared['word_dict']
+            self.model = shared['model']
+            self.feature_dict = shared['feature_dict']
+        else:
+            # set up model
+            self.word_dict = DrqaAgent.dictionary_class()(opt)
+            if self.opt.get('model_file') and os.path.isfile(opt['model_file']):
+                self._init_from_saved(opt['model_file'])
+            else:
+                if self.opt.get('init_model'):
+                    self._init_from_saved(opt['init_model'])
+                else:
+                    self._init_from_scratch()
+            if self.opt['cuda']:
+                print('[ Using CUDA (GPU %d) ]' % opt['gpu'])
+                torch.cuda.set_device(opt['gpu'])
+                self.model.cuda()
 
         # Set up params/logging/dicts
-        self.is_shared = False
         self.id = self.__class__.__name__
-        self.word_dict = word_dict
-        self.opt = copy.deepcopy(opt)
         config.set_defaults(self.opt)
-
-        if self.opt.get('model_file') and os.path.isfile(opt['model_file']):
-            self._init_from_saved(opt['model_file'])
-        else:
-            if self.opt.get('init_model'):
-                self._init_from_saved(opt['init_model'])
-            else:
-                self._init_from_scratch()
-        self.opt['cuda'] = not self.opt['no_cuda'] and torch.cuda.is_available()
-        if self.opt['cuda']:
-            print('[ Using CUDA (GPU %d) ]' % opt['gpu'])
-            torch.cuda.set_device(opt['gpu'])
-            self.model.cuda()
         self.n_examples = 0
 
     def _init_from_scratch(self):
@@ -143,18 +148,22 @@ class DrqaAgent(Agent):
 
     def _init_from_saved(self, fname):
         print('[ Loading model %s ]' % fname)
-        saved_params = torch.load(fname,
-            map_location=lambda storage, loc: storage)
-
+        saved_params = torch.load(fname, map_location=lambda storage, loc: storage)
         if 'word_dict' in saved_params:
             # for compatibility with old saves
             self.word_dict.copy_dict(saved_params['word_dict'])
-
         self.feature_dict = saved_params['feature_dict']
         self.state_dict = saved_params['state_dict']
         config.override_args(self.opt, saved_params['config'])
         self.model = DocReaderModel(self.opt, self.word_dict,
                                     self.feature_dict, self.state_dict)
+
+    def share(self):
+        shared = super().share()
+        shared['word_dict'] = self.word_dict
+        shared['model'] = self.model
+        shared['feature_dict'] = self.feature_dict
+        return shared
 
     def observe(self, observation):
         # shallow copy observation (deep copy can be expensive)
@@ -169,9 +178,6 @@ class DrqaAgent(Agent):
 
     def act(self):
         """Update or predict on a single example (batchsize = 1)."""
-        if self.is_shared:
-            raise RuntimeError("Parallel act is not supported.")
-
         reply = {'id': self.getID()}
 
         ex = self._build_ex(self.observation)
@@ -185,7 +191,10 @@ class DrqaAgent(Agent):
             self.n_examples += 1
             self.model.update(batch)
         else:
-            reply['text'] = self.model.predict(batch)[0]
+            prediction, score = self.model.predict(batch)
+            reply['text'] = prediction[0]
+            reply['text_candidates'] = [prediction[0]]
+            reply['candidate_scores'] = [score[0]]
 
         reply['metrics'] = {'train_loss': self.model.train_loss.avg}
         return reply
@@ -194,9 +203,6 @@ class DrqaAgent(Agent):
         """Update or predict on a batch of examples.
         More efficient than act().
         """
-        if self.is_shared:
-            raise RuntimeError("Parallel act is not supported.")
-
         batchsize = len(observations)
         batch_reply = [{'id': self.getID()} for _ in range(batchsize)]
 
@@ -216,12 +222,28 @@ class DrqaAgent(Agent):
 
         # Either train or predict
         if 'labels' in observations[0]:
-            self.n_examples += len(examples)
-            self.model.update(batch)
+            try:
+                self.n_examples += len(examples)
+                self.model.update(batch)
+            except RuntimeError as e:
+                # catch out of memory exceptions during fwd/bck (skip batch)
+                if 'out of memory' in str(e):
+                    print('| WARNING: ran out of memory, skipping batch. '
+                          'if this happens frequently, decrease batchsize or '
+                          'truncate the inputs to the model.')
+                    batch_reply[0]['metrics'] = {
+                        'skipped_batches': 1,
+                    }
+                    return batch_reply
+                else:
+                    raise e
+
         else:
-            predictions = self.model.predict(batch)
+            predictions, scores = self.model.predict(batch)
             for i in range(len(predictions)):
                 batch_reply[valid_inds[i]]['text'] = predictions[i]
+                batch_reply[valid_inds[i]]['text_candidates'] = [predictions[i]]
+                batch_reply[valid_inds[i]]['candidate_scores'] = [scores[i]]
 
         batch_reply[0]['metrics'] = {
             'train_loss': self.model.train_loss.avg * batchsize,
@@ -233,7 +255,11 @@ class DrqaAgent(Agent):
         fname = self.opt.get('model_file', None) if fname is None else fname
         if fname:
             print("[ saving model: " + fname + " ]")
+            self.opt['trained'] = True
             self.model.save(fname)
+            # save opt file
+            with open(fname + ".opt", 'wb') as handle:
+                pickle.dump(self.opt, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
     # --------------------------------------------------------------------------
     # Helper functions.
@@ -255,7 +281,12 @@ class DrqaAgent(Agent):
         if len(fields) < 2:
             raise RuntimeError('Invalid input. Is task a QA task?')
 
-        document, question = ' '.join(fields[:-1]), fields[-1]
+        paragraphs, question = fields[:-1], fields[-1]
+
+        if len(fields) > 2 and self.opt.get('subsample_docs', 0) > 0 and 'labels' in ex:
+            paragraphs = self. _subsample_doc(paragraphs, ex['labels'], self.opt.get('subsample_docs', 0))
+
+        document = ' '.join(paragraphs)
         inputs['document'], doc_spans = self.word_dict.span_tokenize(document)
         inputs['question'] = self.word_dict.tokenize(question)
         inputs['target'] = None
@@ -302,3 +333,28 @@ class DrqaAgent(Agent):
         if len(targets) == 0:
             return
         return targets[np.random.choice(len(targets))]
+
+    def _subsample_doc(self, paras, labels, subsample):
+        """Subsample paragraphs from the document (mostly for training speed).
+        """
+        # first find a valid paragraph (with a label)
+        pi = -1
+        for ind, p in enumerate(paras):
+            for l in labels:
+                if p.find(l):
+                    pi = ind
+                    break
+        if pi == -1:
+            # failed
+            return paras[0:1]
+        new_paras = []
+        if pi > 0:
+            for i in range(min(subsample, pi - 1)):
+                ind = random.randint(0, pi - 1)
+                new_paras.append(paras[ind])
+        new_paras.append(paras[pi])
+        if pi < len(paras) - 1:
+            for i in range(min(subsample, len(paras) - 1 - pi)):
+                ind = random.randint(pi + 1, len(paras) - 1)
+                new_paras.append(paras[ind])
+        return new_paras

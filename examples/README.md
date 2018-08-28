@@ -50,7 +50,7 @@ python build_dict.py -t babi:task1k:1 --dict-file /tmp/dict.tsv
 
 Train a simple sequence to sequence model on the "1k training examples" bAbI task 1 with batch size of 8 examples for one epoch (requires pytorch):
 ```bash
-python train_model.py -m seq2seq -t babi:task1k:1 -bs 8 -e 1 -mf /tmp/model_s2s
+python train_model.py -m seq2seq -t babi:task1k:1 -bs 8 -eps 1 -mf /tmp/model_s2s
 ```
 
 Trains an attentive LSTM model of [Chen et al.](https://arxiv.org/abs/1704.00051) on the SQuAD dataset with a batch size of 32 examples (requires pytorch):
@@ -60,12 +60,10 @@ python train_model.py -m drqa -t squad -bs 32 -mf /tmp/model_drqa
 
 Evaluates on an already trained SQuAD model:
 ```bash
-wget https://s3.amazonaws.com/fair-data/parlai/_models/drqa/squad.mdl
-python eval_model.py -m drqa -t squad -mf squad.mdl -dt valid
+python eval_model.py -t squad -mf "models:drqa/squad/model"
 ```
 
 Interactive session on an already trained SQuAD model:
 ```bash
-wget https://s3.amazonaws.com/fair-data/parlai/_models/drqa/squad.mdl
-python interactive.py -m drqa -mf squad.mdl
+python interactive.py -mf "models:drqa/squad/model"
 ```

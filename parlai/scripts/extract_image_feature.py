@@ -28,9 +28,15 @@ def setup_args(parser=None):
         parser = ParlaiParser(True, False)
     arg_group = parser.add_argument_group('Image Extraction')
     arg_group.add_argument('--dataset', type=str, default=None,
-                           help='Pytorch Dataset')
+                           help='Pytorch Dataset; if specified, will save \
+                           the images in one hdf5 file according to how \
+                           they are returned by the specified dataset')
     arg_group.add_argument('-at', '--attention', action='store_true',
-                           help='Whether to extract image features with attention')
+                           help='Whether to extract image features with attention \
+                           (Note - this is specifically for the mlb_vqa model)')
+    arg_group.add_argument('--use-hdf5-extraction', type='bool', default=False,
+                           help='Whether to extract images into an hdf5 dataset')
+
     return parser
 
 
@@ -43,7 +49,7 @@ def get_dataset_class(opt):
         would just be:
         ``--dataset parlai.tasks.vqa_v1.agents``
     """
-    dataset_name = opt.get('dataset')
+    dataset_name = opt.get('pytorch_teacher_dataset')
     sp = dataset_name.strip().split(':')
     module_name = sp[0]
     if len(sp) > 1:
@@ -66,11 +72,12 @@ def extract_feats(opt):
     opt['no_cuda'] = False
     opt['gpu'] = 0
     opt['num_epochs'] = 1
-    opt['no_hdf5'] = True
+    opt['use_hdf5'] = False
+    opt['num_load_threads'] = 20
     logger = ProgressLogger(should_humanize=False, throttle=0.1)
     print("[ Loading Images ]")
     # create repeat label agent and assign it to the specified task
-    if opt.get('dataset') is None:
+    if opt.get('pytorch_teacher_dataset') is None:
         agent = RepeatLabelAgent(opt)
         world = create_task(opt, agent)
 
@@ -80,7 +87,7 @@ def extract_feats(opt):
             world.parley()
             exs_seen += bsz
             logger.log(exs_seen, total_exs)
-    else:
+    elif opt.get('use_hdf5_extraction', False):
         '''One can specify a Pytorch Dataset for custom image loading'''
         nw = opt.get('numworkers', 1)
         im = opt.get('image_mode', 'raw')
@@ -90,8 +97,8 @@ def extract_feats(opt):
         try:
             import torch
             from torch.utils.data import DataLoader
-        except ModuleNotFoundError:
-            raise ModuleNotFoundError('Need to install Pytorch: go to pytorch.org')
+        except ImportError:
+            raise ImportError('Need to install Pytorch: go to pytorch.org')
 
         dataset = get_dataset_class(opt)(opt)
         pre_image_path, _ = os.path.split(dataset.image_path)
@@ -103,7 +110,10 @@ def extract_feats(opt):
             opt['num_load_threads'] = 20
             agent = RepeatLabelAgent(opt)
             if opt['task'] == 'pytorch_teacher':
-                opt['task'] = opt['pytorch_buildteacher']
+                if opt.get('pytorch_teacher_task'):
+                    opt['task'] = opt['pytorch_teacher_task']
+                else:
+                    opt['task'] = opt['pytorch_teacher_dataset']
             world = create_task(opt, agent)
             exs_seen = 0
             total_exs = world.num_examples()

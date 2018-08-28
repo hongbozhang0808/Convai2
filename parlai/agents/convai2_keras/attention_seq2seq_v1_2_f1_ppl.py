@@ -23,7 +23,7 @@ class AttentionSeq2seqAgent(Agent):
     def add_cmdline_args(argparser):
         DictionaryAgent.add_cmdline_args(argparser)
         agent = argparser.add_argument_group('RNN Arguments')
-        agent.add_argument('-rnn', '--rnntype', type=str, default='GRU',
+        agent.add_argument('-rnn', '--rnntype', type=str, default='LSTM',
                            help='choose GRU or LSTM')
         agent.add_argument('-hs', '--hiddensize', type=int, default=0,
                            help='size of the hidden layers and embeddings')
@@ -394,10 +394,10 @@ class PerplexityEvaluatorAgent(AttentionSeq2seqAgent):
         obs = self.observation
         next_index = 0
         if len(partial_out) > 0:
-            obs['labels'] = ['__START__ '+' '.join(partial_out)]
+            obs['labels'] = ['__start__ '+' '.join(partial_out)]
             next_index = len(partial_out)
         else:
-            obs['labels'] = ['__START__']
+            obs['labels'] = ['__start__']
         context_vetors, selcted_persona_vectors, response, _ = self.batchify([obs])
         probs = self.model.predict({'context_input': context_vetors,
                                     'persona_input': selcted_persona_vectors,

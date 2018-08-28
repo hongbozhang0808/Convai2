@@ -7,7 +7,9 @@
 from parlai.core.teachers import FixedDialogTeacher
 from parlai.core.image_featurizers import ImageLoader
 from parlai.tasks.vqa_v1.agents import VQADataset
-from .build import build, buildImage
+from .build import build
+from parlai.tasks.coco_caption.build_2014 import buildImage as buildImage_2014
+from parlai.tasks.coco_caption.build_2015 import buildImage as buildImage_2015
 
 import json
 import os
@@ -15,21 +17,26 @@ import os
 
 def _path(opt):
     build(opt)
-    buildImage(opt)
+    buildImage_2014(opt)
+    buildImage_2015(opt)
     dt = opt['datatype'].split(':')[0]
 
+    img_version = None
     if dt == 'train':
         ques_suffix = 'v2_OpenEnded_mscoco_train2014'
         annotation_suffix = 'v2_mscoco_train2014'
         img_suffix = os.path.join('train2014', 'COCO_train2014_')
+        img_version = '2014'
     elif dt == 'valid':
         ques_suffix = 'v2_OpenEnded_mscoco_val2014'
         annotation_suffix = 'v2_mscoco_val2014'
         img_suffix = os.path.join('val2014', 'COCO_val2014_')
+        img_version = '2014'
     elif dt == 'test':
         ques_suffix = 'v2_OpenEnded_mscoco_test2015'
         annotation_suffix = 'None'
         img_suffix = os.path.join('test2015', 'COCO_test2015_')
+        img_version = '2015'
     else:
         raise RuntimeError('Not valid datatype.')
 
@@ -39,7 +46,8 @@ def _path(opt):
     annotation_path = os.path.join(opt['datapath'], 'VQA-v2',
                                    annotation_suffix + '_annotations.json')
 
-    image_path = os.path.join(opt['datapath'], 'COCO-IMG', img_suffix)
+    image_path = os.path.join(opt['datapath'],
+                              'COCO-IMG-{}'.format(img_version), img_suffix)
 
     return data_path, annotation_path, image_path
 
@@ -73,7 +81,6 @@ class OeTeacher(FixedDialogTeacher):
     def reset(self):
         super().reset()  # call parent reset so other fields can be set up
         self.example = None  # set up caching fields
-        self.next_example()  # call this once to get the cache moving
 
     def num_examples(self):
         return len(self.ques['questions'])
@@ -120,8 +127,11 @@ class OeTeacher(FixedDialogTeacher):
             # load the next image in the background
             image_id = self.example['image_id']
             self.submit_load_request(image_id)
-        # return the previously cached example
-        return ready
+        # Try to return the previously cached example
+        if ready is None:
+            return self.next_example()
+        else:
+            return ready
 
     def share(self):
         shared = super().share()

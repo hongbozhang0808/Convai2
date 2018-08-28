@@ -6,8 +6,7 @@
 """Basic example which allows local human keyboard input to talk to a trained model.
 
 For example:
-`wget https://s3.amazonaws.com/fair-data/parlai/_models/drqa/squad.mdl`
-`python examples/interactive.py -m drqa -mf squad.mdl`
+`python examples/interactive.py -m drqa -mf "models:drqa/squad/model"`
 
 Then enter something like:
 "Bob is Blue.\nWhat is Bob?"
@@ -17,13 +16,22 @@ a context followed by '\n' followed by a question all as a single input.)
 from parlai.core.params import ParlaiParser
 from parlai.core.agents import create_agent
 from parlai.core.worlds import create_task
+from parlai.agents.local_human.local_human import LocalHumanAgent
 
 import random
+
 
 def setup_args(parser=None):
     if parser is None:
         parser = ParlaiParser(True, True)
     parser.add_argument('-d', '--display-examples', type='bool', default=False)
+    parser.add_argument('--display-prettify', type='bool', default=False,
+                        help='Set to use a prettytable when displaying '
+                             'examples with text candidates')
+    parser.add_argument('--display-ignore-fields', type=str,
+                        default='label_candidates,text_candidates',
+                        help='Do not display these fields')
+    LocalHumanAgent.add_cmdline_args(parser)
     return parser
 
 
@@ -42,7 +50,7 @@ def interactive(opt):
         world.parley()
         if opt.get('display_examples'):
             print("---")
-            print(world.display() + "\n~~")
+            print(world.display())
         if world.epoch_done():
             print("EPOCH DONE")
             break

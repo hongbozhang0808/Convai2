@@ -7,14 +7,14 @@
 import math
 import torch
 import torch.nn as nn
-from torch.autograd import Variable
+
 
 class Starspace(nn.Module):
     def __init__(self, opt, num_features, dict):
         super().__init__()
         self.lt = nn.Embedding(num_features, opt['embeddingsize'], 0,
                                sparse=True, max_norm=opt['embeddingnorm'])
-        if not opt['tfidf']: 
+        if not opt['tfidf']:
             dict = None
         self.encoder = Encoder(self.lt, dict)
         if not opt['share_embeddings']:
@@ -26,11 +26,10 @@ class Starspace(nn.Module):
         self.opt = opt
         self.lin = nn.Linear(opt['embeddingsize'], opt['embeddingsize'], bias=False)
         self.lins = 0
-        if 'lins' in opt: 
+        if 'lins' in opt:
             self.lins = opt['lins']
-            
+
     def forward(self, xs, ys=None, cands=None):
-        scores = None
         xs_enc = []
         ys_enc = []
         xs_emb = self.encoder(xs)
@@ -45,6 +44,7 @@ class Starspace(nn.Module):
             c_emb = self.encoder2(c)
             ys_enc.append(c_emb)
         return torch.cat(xs_enc), torch.cat(ys_enc)
+
 
 class Encoder(nn.Module):
     def __init__(self, shared_lt, dict):
@@ -66,7 +66,7 @@ class Encoder(nn.Module):
         if self.freqs is not None:
             # tfidf embeddings
             l = xs.size(1)
-            w = Variable(torch.Tensor(l))
+            w = torch.Tensor(l)
             for i in range(l):
                 w[i] = self.freqs[xs.data[0][i]]
             w = w.mul(1 / w.norm())

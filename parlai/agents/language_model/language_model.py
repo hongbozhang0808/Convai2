@@ -7,20 +7,17 @@
 from parlai.core.agents import Agent
 from parlai.core.dict import DictionaryAgent
 from parlai.core.utils import PaddingUtils, round_sigfigs
+from parlai.core.thread_utils import SharedTable
 from .modules import RNNModel
 
 import torch
 from torch.autograd import Variable
-from torch import optim
 import torch.nn as nn
 
-from collections import deque
-
-import copy
 import os
 import math
-import random
-import re
+import pickle
+
 
 class LanguageModelAgent(Agent):
     """ Agent which trains an RNN on a language modeling task.
@@ -65,7 +62,7 @@ class LanguageModelAgent(Agent):
                            help='truncate predictions')
         agent.add_argument('-rf', '--report-freq', type=float, default=0.1,
                            help='report frequency of prediction during eval')
-        agent.add_argument('-pt', '--person-tokens', type=bool, default=True,
+        agent.add_argument('-pt', '--person-tokens', type='bool', default=True,
                            help='append person1 and person2 tokens to text')
         # learning rate parameters
         agent.add_argument('-lr', '--learningrate', type=float, default=20,
@@ -77,7 +74,7 @@ class LanguageModelAgent(Agent):
                            help='wait before decreasing learning rate')
         agent.add_argument('-lrm', '--lr-minimum', type=float, default=0.1,
                            help='minimum learning rate')
-        agent.add_argument('-sm', '--sampling-mode', type=bool, default=False,
+        agent.add_argument('-sm', '--sampling-mode', type='bool', default=False,
                            help='sample when generating tokens instead of taking \
                            the max and do not produce UNK token (when bs=1)')
         LanguageModelAgent.dictionary_class().add_cmdline_args(argparser)
@@ -87,7 +84,12 @@ class LanguageModelAgent(Agent):
         """Set up model if shared params not set, otherwise no work to do."""
         super().__init__(opt, shared)
         opt = self.opt  # there is a deepcopy in the init
-        self.metrics = {'loss': 0, 'num_tokens': 0, 'lmloss': 0, 'lm_num_tokens': 0}
+        self.metrics = {
+            'loss': 0,
+            'num_tokens': 0,
+            'lmloss': 0,
+            'lm_num_tokens': 0
+        }
         self.states = {}
         # check for cuda
         self.use_cuda = not opt.get('no_cuda') and torch.cuda.is_available()
@@ -97,16 +99,19 @@ class LanguageModelAgent(Agent):
 
         if shared:
             # set up shared properties
+            self.opt = shared['opt']
+            opt = self.opt
             self.dict = shared['dict']
 
-            if 'model' in shared:
-                # model is shared during hogwild
-                self.model = shared['model']
-                self.states = shared['states']
+            self.model = shared['model']
+            self.metrics = shared['metrics']
 
             # get NULL token and END token
             self.NULL_IDX = self.dict[self.dict.null_token]
             self.END_IDX = self.dict[self.dict.end_token]
+
+            if 'states' in shared:
+                self.states = shared['states']
 
             if self.use_person_tokens:
                 # add person1 and person2 tokens
@@ -119,29 +124,37 @@ class LanguageModelAgent(Agent):
                 print('[ Using CUDA ]')
                 torch.cuda.set_device(opt['gpu'])
 
+            init_model = None
             # check first for 'init_model' for loading model from file
             if opt.get('init_model') and os.path.isfile(opt['init_model']):
                 init_model = opt['init_model']
-            # next check for 'model_file'
-            elif opt.get('model_file') and os.path.isfile(opt['model_file']):
+            # next check for 'model_file', this would override init_model
+            if opt.get('model_file') and os.path.isfile(opt['model_file']):
                 init_model = opt['model_file']
-            else:
-                init_model = None
 
-            if init_model is not None:
+            # for backwards compatibility: will only be called for older models
+            # for which .opt file does not exist
+            if (init_model is not None and
+                    not os.path.isfile(init_model + '.opt')):
+                new_opt = self.load_opt(init_model)
                 # load model parameters if available
-                print('Loading existing model params from ' + init_model)
-                new_opt, self.states = self.load(init_model)
-                # override model-specific options with stored ones
+                print('[ Setting opt from {} ]'.format(
+                    init_model
+                ))
+                # since .opt file does not exist, save one for future use
+                print("Saving opt file at:", init_model + ".opt")
+                with open(init_model + ".opt", 'wb') as handle:
+                    pickle.dump(
+                        new_opt,
+                        handle,
+                        protocol=pickle.HIGHEST_PROTOCOL
+                    )
                 opt = self.override_opt(new_opt)
 
-            if opt['dict_file'] is None:
-                if init_model is not None and os.path.isfile(init_model + '.dict'):
-                    # check first to see if a dictionary exists
-                    opt['dict_file'] = init_model + '.dict'
-                elif opt.get('model_file'):
-                    # otherwise, set default dict-file if it is not set
-                    opt['dict_file'] = opt['model_file'] + '.dict'
+            if ((init_model is not None and
+                    os.path.isfile(init_model + '.dict')) or
+                    opt['dict_file'] is None):
+                opt['dict_file'] = init_model + '.dict'
 
             # load dictionary and basic tokens & vectors
             self.dict = DictionaryAgent(opt)
@@ -159,9 +172,8 @@ class LanguageModelAgent(Agent):
             # set model
             self.model = RNNModel(opt, len(self.dict))
 
-            if self.states:
-                # set loaded states if applicable
-                self.model.load_state_dict(self.states['model'])
+            if init_model is not None:
+                self.load(init_model)
 
             if self.use_cuda:
                 self.model.cuda()
@@ -171,40 +183,37 @@ class LanguageModelAgent(Agent):
 
         self.is_training = True
 
-        if hasattr(self, 'model'):
-            # if model was built, do more setup
-            self.clip = opt.get('gradient_clip', 0.25)
-            # set up criteria
-            self.criterion = nn.CrossEntropyLoss(ignore_index=self.NULL_IDX,
-                                                 size_average=False)
-            if self.use_cuda:
-                # push to cuda
-                self.criterion.cuda()
-            # init hidden state
-            self.hidden = self.model.init_hidden(self.batchsize)
-            # init tensor of end tokens
-            self.ends = torch.LongTensor([self.END_IDX for _ in range(self.batchsize)])
-            if self.use_cuda:
-                self.ends = self.ends.cuda()
-            # set up model and learning rate scheduler parameters
-            self.lr = opt['learningrate']
-            self.optimizer = torch.optim.SGD(self.model.parameters(), lr=self.lr)
-            self.best_val_loss = self.states.get('best_val_loss', None)
-            self.lr_factor = opt['lr_factor']
-            if self.lr_factor < 1.0:
-                self.lr_patience = opt['lr_patience']
-                self.lr_min = opt['lr_minimum']
-                self.scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-                    self.optimizer, factor=self.lr_factor, verbose=True,
-                    patience=self.lr_patience, min_lr=self.lr_min)
-                # initial step for scheduler if self.best_val_loss is initialized
-                if self.best_val_loss is not None:
-                    self.scheduler.step(self.best_val_loss)
-            else:
-                self.scheduler = None
+        self.clip = opt.get('gradient_clip', 0.25)
+        # set up criteria
+        self.criterion = nn.CrossEntropyLoss(ignore_index=self.NULL_IDX,
+                                             size_average=False)
+        if self.use_cuda:
+            # push to cuda
+            self.criterion.cuda()
+        # init hidden state
+        self.hidden = self.model.init_hidden(self.batchsize)
+        # init tensor of end tokens
+        self.ends = torch.LongTensor([self.END_IDX for _ in range(self.batchsize)])
+        if self.use_cuda:
+            self.ends = self.ends.cuda()
+        # set up model and learning rate scheduler parameters
+        self.lr = opt['learningrate']
+        self.optimizer = torch.optim.SGD(self.model.parameters(), lr=self.lr)
+        self.best_val_loss = self.states.get('best_val_loss', None)
+        self.lr_factor = opt['lr_factor']
+        if self.lr_factor < 1.0:
+            self.lr_patience = opt['lr_patience']
+            self.lr_min = opt['lr_minimum']
+            self.scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
+                self.optimizer, factor=self.lr_factor, verbose=True,
+                patience=self.lr_patience, min_lr=self.lr_min)
+            # initial step for scheduler if self.best_val_loss is initialized
+            if self.best_val_loss is not None:
+                self.scheduler.step(self.best_val_loss)
+        else:
+            self.scheduler = None
 
         self.reset()
-
 
     def override_opt(self, new_opt):
         """Set overridable opts from loaded opt file.
@@ -212,7 +221,8 @@ class LanguageModelAgent(Agent):
         Only override args specific to the model.
         """
         model_args = {'hiddensize', 'embeddingsize', 'numlayers', 'dropout',
-                      'seq_len', 'emb_tied'}
+                      'seq_len', 'emb_tied', 'truncate_pred', 'report_freq',
+                      'person_tokens', 'learningrate'}
         for k, v in new_opt.items():
             if k not in model_args:
                 # skip non-model args
@@ -235,7 +245,7 @@ class LanguageModelAgent(Agent):
 
     def update_params(self):
         """Do one optimization step."""
-        torch.nn.utils.clip_grad_norm(self.model.parameters(), self.clip)
+        torch.nn.utils.clip_grad_norm_(self.model.parameters(), self.clip)
         self.optimizer.step()
 
     def reset(self):
@@ -266,20 +276,27 @@ class LanguageModelAgent(Agent):
     def share(self):
         """Share internal states between parent and child instances."""
         shared = super().share()
+        shared['opt'] = self.opt
         shared['dict'] = self.dict
         shared['NULL_IDX'] = self.NULL_IDX
         shared['END_IDX'] = self.END_IDX
+        shared['model'] = self.model
         if self.opt.get('numthreads', 1) > 1:
-            shared['model'] = self.model
-            self.model.share_memory()
-            shared['states'] = self.states
+            if type(self.metrics) == dict:
+                # move metrics and model to shared memory
+                self.metrics = SharedTable(self.metrics)
+                self.model.share_memory()
+            shared['states'] = {  # only need to pass optimizer states
+                'optimizer': self.optimizer.state_dict(),
+            }
+        shared['metrics'] = self.metrics
         return shared
 
     def observe(self, observation):
         """Save observation for act.
         If multiple observations are from the same episode, concatenate them.
         """
-        #shallow copy observation (deep copy can be expensive)
+        # shallow copy observation (deep copy can be expensive)
         obs = observation.copy()
         seq_len = self.opt['seq_len']
         is_training = True
@@ -347,19 +364,19 @@ class LanguageModelAgent(Agent):
             return loss
 
         # feed in inputs without end token
-        output, hidden = self.model(data.transpose(0,1), hidden)
+        output, hidden = self.model(data.transpose(0, 1), hidden)
         self.hidden = self.repackage_hidden(hidden)
         # feed in end tokens
-        output, hidden = self.model(Variable(self.ends[:bsz].view(1,bsz)), self.hidden)
+        output, hidden = self.model(Variable(self.ends[:bsz].view(1, bsz)), self.hidden)
         self.hidden = self.repackage_hidden(hidden)
         output_flat = output.view(-1, len(self.dict))
-        loss += self.criterion(output_flat, targets.select(1,0).view(-1)).data
+        loss += self.criterion(output_flat, targets.select(1, 0).view(-1)).data
 
         for i in range(1, targets.size(1)):
-            output, hidden = self.model(targets.select(1,i-1).view(1, bsz), self.hidden, no_pack=True)
+            output, hidden = self.model(targets.select(1, i - 1).view(1, bsz), self.hidden, no_pack=True)
             self.hidden = self.repackage_hidden(hidden)
             output_flat = output.view(-1, len(self.dict))
-            loss += self.criterion(output_flat, targets.select(1,i).view(-1)).data
+            loss += self.criterion(output_flat, targets.select(1, i).view(-1)).data
 
         return loss
 
@@ -374,19 +391,20 @@ class LanguageModelAgent(Agent):
         hidden = self.model.init_hidden(bsz)
 
         i = 0
+        word_idx = None
         while total_done < bsz and i <= self.opt['truncate_pred']:
             if i == 0:
                 # feed in input without end tokens
-                output, hidden = self.model(data.transpose(0,1), hidden)
+                output, hidden = self.model(data.transpose(0, 1), hidden)
                 hidden = self.repackage_hidden(hidden)
                 # feed in end tokens
-                output, hidden = self.model(Variable(self.ends[:bsz].view(1,bsz)), hidden)
+                output, hidden = self.model(Variable(self.ends[:bsz].view(1, bsz)), hidden)
             else:
                 output, hidden = self.model(Variable(word_idx.view(1, bsz)), hidden, no_pack=True)
             hidden = self.repackage_hidden(hidden)
             word_weights = output.squeeze().data.exp()
             if bsz > 1:
-                value, word_idx = torch.max(word_weights, 1)
+                _, word_idx = torch.max(word_weights, 1)
             else:
                 if self.sampling_mode:
                     unk_idx = self.dict[self.dict.unk_token]
@@ -404,8 +422,9 @@ class LanguageModelAgent(Agent):
                     while word_idx == unk_idx:
                         word_idx = torch.multinomial(word_weights, 1)
                 else:
-                    value, word_idx = torch.max(word_weights, 0)
+                    _, word_idx = torch.max(word_weights, 0)
             # mark end indices for items in batch
+            word_idx = word_idx.view(-1)
             for k in range(word_idx.size(0)):
                 if not done[k]:
                     if int(word_idx[k]) == self.END_IDX:
@@ -414,8 +433,7 @@ class LanguageModelAgent(Agent):
             token_list.append(word_idx.view(bsz, 1))
             i += 1
 
-        return torch.cat(token_list,1)
-
+        return torch.cat(token_list, 1)
 
     def predict(self, data, hidden, targets=None, is_training=True, y_lens=None):
         """Produce a prediction from our model."""
@@ -427,8 +445,8 @@ class LanguageModelAgent(Agent):
             output, hidden = self.model(data, hidden)
             loss = self.criterion(output.view(-1, len(self.dict)), targets.view(-1))
             # save loss to metrics
-            target_tokens = targets.ne(self.NULL_IDX).long().sum().data[0]
-            self.metrics['lmloss'] += loss.double().data[0]
+            target_tokens = targets.ne(self.NULL_IDX).float().sum().item()
+            self.metrics['lmloss'] += loss.double().item()
             self.metrics['lm_num_tokens'] += target_tokens
             # average loss per token
             loss /= target_tokens
@@ -463,8 +481,8 @@ class LanguageModelAgent(Agent):
                 data_list = []
                 targets_list = []
                 # total is the number of batches
-                total = len(self.next_batch)//self.batchsize
-                for i in range(total):
+                total = len(self.next_batch) // self.batchsize
+                for _ in range(total):
                     batch = self.next_batch[:self.batchsize]
                     self.next_batch = self.next_batch[self.batchsize:]
 
@@ -506,7 +524,7 @@ class LanguageModelAgent(Agent):
             if self.is_training == False:
                 self.hidden = self.model.init_hidden(self.batchsize)
             self.is_training = True
-            data_list, targets_list, _, _, y_lens = self.vectorize(observations, self.opt['seq_len'], self.is_training)
+            data_list, targets_list, _c, _v, y_lens = self.vectorize(observations, self.opt['seq_len'], self.is_training)
         else:
             # if we just finished training, reinitialize hidden
             if self.is_training == True:
@@ -561,6 +579,9 @@ class LanguageModelAgent(Agent):
 
             with open(path, 'wb') as write:
                 torch.save(model, write)
+            # save opt file
+            with open(path + ".opt", 'wb') as handle:
+                pickle.dump(self.opt, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
     def shutdown(self):
         """Save the state of the model when shutdown."""
@@ -573,7 +594,15 @@ class LanguageModelAgent(Agent):
         if 'loss' in metrics_dict and self.scheduler is not None:
             self.scheduler.step(metrics_dict['loss'])
 
-    def load(self, path):
-        """Return opt and model states."""
+    def load_opt(self, path):
+        """Return opt, states."""
         states = torch.load(path, map_location=lambda cpu, _: cpu)
-        return states['opt'], states
+        return states['opt']
+
+    def load(self, path):
+        """Load model states."""
+        if os.path.isfile(path):
+            # load model parameters if available
+            print('[ Loading existing model params from {} ]'.format(path))
+            self.states = torch.load(path, map_location=lambda cpu, _: cpu)
+            self.model.load_state_dict(self.states['model'])

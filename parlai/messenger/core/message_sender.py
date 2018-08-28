@@ -73,9 +73,14 @@ def create_text_message(text, quick_replies=None):
             )
         )
     for i in range(len(tokens)):
+        if tokens[i] == '[*SPLIT*]':
+            if ' '.join(tokens[cutoff:i - 1]).strip() != '':
+                splits.append(_message(' '.join(tokens[cutoff:i]), None))
+                cutoff = i + 1
+                curr_length = 0
         if (curr_length + len(tokens[i]) > MAX_TEXT_CHARS):
             splits.append(_message(' '.join(tokens[cutoff:i]), None))
-            cutoff = i + 1
+            cutoff = i
             curr_length = 0
         curr_length += len(tokens[i]) + 1
     if cutoff < len(tokens):
@@ -160,7 +165,7 @@ class MessageSender():
     def typing_on(self, receiver_id):
         self.send_sender_action(receiver_id, "typing_on")
 
-    def send_fb_payload(self, receiver_id, payload):
+    def send_fb_payload(self, receiver_id, payload, quick_replies=None):
         """Sends a payload to messenger, processes it if we can"""
         api_address = 'https://graph.facebook.com/v2.6/me/messages'
         if payload['type'] == 'list':
@@ -169,6 +174,7 @@ class MessageSender():
             data = create_attachment(payload)
         else:
             data = payload['data']
+
         message = {
             "messaging_type": 'RESPONSE',
             "recipient": {
@@ -178,12 +184,24 @@ class MessageSender():
                 "attachment": data,
             }
         }
+        if quick_replies is not None:
+            quick_replies = [create_reply_option(x, x) for x in quick_replies]
+            message['message']['quick_replies'] = quick_replies
         response = requests.post(
             api_address,
             params=self.auth_args,
             json=message,
         )
         result = response.json()
+        if 'error' in result:
+            if result['error']['code'] == 1200:
+                # temporary error please retry
+                response = requests.post(
+                    api_address,
+                    params=self.auth_args,
+                    json=message,
+                )
+                result = response.json()
         shared_utils.print_and_log(
             logging.INFO,
             '"Facebook response from message send: {}"'.format(result)
@@ -214,6 +232,15 @@ class MessageSender():
                 json=payload
             )
             result = response.json()
+            if 'error' in result:
+                if result['error']['code'] == 1200:
+                    # temporary error please retry
+                    response = requests.post(
+                        api_address,
+                        params=self.auth_args,
+                        json=payload,
+                    )
+                    result = response.json()
             shared_utils.print_and_log(
                 logging.INFO,
                 '"Facebook response from message send: {}"'.format(result)

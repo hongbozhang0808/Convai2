@@ -37,7 +37,7 @@ def preprocess(text, lan='english'):
         text = [t.replace('\n', ' ') for t in text]
         text = [re.sub(' [ ]*', ' ', t) for t in text]
         text = [t.strip() for t in text]
-        text = [t+' __END__' for t in text]
+        text = [t+' __end__' for t in text]
         return text
     elif lan=='spanish':
         ###
@@ -53,7 +53,7 @@ def preprocess(text, lan='english'):
         text = [t.replace('\n', ' ') for t in text]
         text = [re.sub(' [ ]*', ' ', t) for t in text]
         text = [t.strip() for t in text]
-        text = [t+' __END__' for t in text]
+        text = [t+' __end__' for t in text]
         ###
         return text
     else:
@@ -137,7 +137,7 @@ def text2vec(text, tok2ind, max_len, use_offset=True, use_max_len=True):
             elif w == '__start__':
                 v[iw] = 1
             else:
-                # '__nuk__'
+                # '__unk__'
                 v[iw] = 3
         return v
 
@@ -163,7 +163,7 @@ def text2vec(text, tok2ind, max_len, use_offset=True, use_max_len=True):
 
 # transform their id representations to the word sentences
 def vec2text(vec, ind2tok):
-    text = ['__NULL__'] * len(vec)
+    text = ['__null__'] * len(vec)
     for i, v in enumerate(vec):
         text[i] = ind2tok[v]
     return text

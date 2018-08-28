@@ -14,7 +14,7 @@ def create_fb_format(outpath, dtype, inpath):
     fout = open(os.path.join(outpath, dtype + '.txt'), 'w')
     with open(inpath) as f:
         lines = [line.strip('\n') for line in f]
-    lastqid = None
+    lastqid, lq, ans, cands = None, None, None, None
     for i in range(2, len(lines)):
         l = lines[i].split('\t')
         lqid = l[0]  # question id
@@ -50,7 +50,7 @@ def build(opt):
 
         # Download the data.
         fname = 'wikiqa.tar.gz'
-        url = 'https://s3.amazonaws.com/fair-data/parlai/wikiqa/' + fname
+        url = 'http://parl.ai/downloads/wikiqa/' + fname
         build_data.download(url, dpath, fname)
         build_data.untar(dpath, fname)
 

@@ -15,9 +15,20 @@ from collections import Counter
 import re
 import math
 
+try:
+    from nltk.translate import bleu_score as nltkbleu
+except ImportError:
+    # User doesn't have nltk installed, so we can't use it for bleu
+    # We'll just turn off things, but we might want to warn the user
+    nltkbleu = None
+
+nltkbleu = None
+
 re_art = re.compile(r'\b(a|an|the)\b')
 re_punc = re.compile(r'[!"#$%&()*+,-./:;<=>?@\[\]\\^`{|}~_\']')
-def _normalize_answer(s):
+
+
+def normalize_answer(s):
     """Lower text and remove punctuation, articles and extra whitespace."""
     def remove_articles(text):
         return re_art.sub(' ', text)
@@ -38,37 +49,68 @@ def _exact_match(guess, answers):
     """Check if guess is a (normalized) exact match with any answer."""
     if guess is None or answers is None:
         return False
-    guess = _normalize_answer(guess)
+    guess = normalize_answer(guess)
     for a in answers:
-        if guess == _normalize_answer(a):
+        if guess == normalize_answer(a):
             return True
     return False
 
 
-def _f1_score(guess, answers):
-    """Return the max F1 score between the guess and any answer."""
-    def _score(g_tokens, a_tokens):
-        common = Counter(g_tokens) & Counter(a_tokens)
-        num_same = sum(common.values())
-        if num_same == 0:
-            return 0
-        precision = 1.0 * num_same / len(g_tokens)
-        recall = 1.0 * num_same / len(a_tokens)
-        f1 = (2 * precision * recall) / (precision + recall)
-        return f1
+def _prec_recall_f1_score(pred_items, gold_items):
+    """
+    Computes precision, recall and f1 given a set of gold and prediction items.
 
+    :param pred_items: iterable of predicted values
+    :param gold_items: iterable of gold values
+
+    :return: tuple (p, r, f1) for precision, recall, f1
+    """
+    common = Counter(gold_items) & Counter(pred_items)
+    num_same = sum(common.values())
+    if num_same == 0:
+        return 0, 0, 0
+    precision = 1.0 * num_same / len(pred_items)
+    recall = 1.0 * num_same / len(gold_items)
+    f1 = (2 * precision * recall) / (precision + recall)
+    return precision, recall, f1
+
+
+def _f1_score(guess, answers):
+    """Return the max F1 score between the guess and *any* answer."""
     if guess is None or answers is None:
         return 0
-    g_tokens = _normalize_answer(guess).split()
-    scores = [_score(g_tokens, _normalize_answer(a).split()) for a in answers]
-    return max(scores)
+    g_tokens = normalize_answer(guess).split()
+    scores = [
+        _prec_recall_f1_score(g_tokens, normalize_answer(a).split())for a in answers
+    ]
+    return max(f1 for p, r, f1 in scores)
+
+
+def _bleu(guess, answers):
+    """Compute approximate BLEU score between guess and a set of answers."""
+    if nltkbleu is None:
+        # bleu library not installed, just return a default value
+        return None
+    # Warning: BLEU calculation *should* include proper tokenization and
+    # punctuation etc. We're using the normalize_answer for everything though,
+    # so we're over-estimating our BLEU scores.  Also note that NLTK's bleu is
+    # going to be slower than fairseq's (which is written in C), but fairseq's
+    # requires that everything be in arrays of ints (i.e. as tensors). NLTK's
+    # works with strings, which is better suited for this module.
+    return nltkbleu.sentence_bleu(
+        [normalize_answer(a).split(" ") for a in answers],
+        normalize_answer(guess).split(" "),
+        smoothing_function=nltkbleu.SmoothingFunction(epsilon=1e-12).method1,
+    )
 
 
 def aggregate_metrics(reporters):
-    #reporters is a list of teachers or worlds
+    # reporters is a list of teachers or worlds
     m = {}
     m['tasks'] = {}
     sums = {'accuracy': 0, 'f1': 0, 'loss': 0, 'ppl': 0}
+    if nltkbleu is not None:
+        sums['bleu'] = 0
     num_tasks = 0
     total = 0
     for i in range(len(reporters)):
@@ -78,7 +120,7 @@ def aggregate_metrics(reporters):
             # prevent name cloberring if using multiple tasks with same ID
             tid += '_'
         m['tasks'][tid] = mt
-        total += mt['total']
+        total += mt['exs']
         found_any = False
         for k in sums.keys():
             if k in mt:
@@ -86,7 +128,7 @@ def aggregate_metrics(reporters):
                 found_any = True
         if found_any:
             num_tasks += 1
-    m['total'] = total
+    m['exs'] = total
     m['accuracy'] = 0
     if num_tasks > 0:
         for k in sums.keys():
@@ -135,6 +177,9 @@ class Metrics(object):
         self.metrics = {}
         self.metrics['cnt'] = 0
         self.metrics_list = ['mean_rank', 'loss', 'correct', 'f1', 'ppl']
+        if nltkbleu is not None:
+            # only compute bleu if we can
+            self.metrics_list.append('bleu')
         for k in self.metrics_list:
             self.metrics[k] = 0.0
             self.metrics[k + '_cnt'] = 0
@@ -167,17 +212,15 @@ class Metrics(object):
         if text_cands is None:
             return
         else:
-            text = observation.get('text', None)
-
             # Now loop through text candidates, assuming they are sorted.
             # If any of them is a label then score a point.
             # maintain hits@1, 5, 10, 50, 100,  etc.
-            label_set = set(_normalize_answer(l) for l in labels)
+            label_set = set(normalize_answer(l) for l in labels)
             cnts = {k: 0 for k in self.eval_pr}
             cnt = 0
             for c in text_cands:
                 cnt += 1
-                if _normalize_answer(c) in label_set:
+                if normalize_answer(c) in label_set:
                     for k in self.eval_pr:
                         if cnt <= k:
                             cnts[k] += 1
@@ -206,11 +249,15 @@ class Metrics(object):
                 self.metrics['correct'] += correct
                 self.metrics['correct_cnt'] += 1
 
-            # F1 metric.
+            # F1 and BLEU metrics.
             f1 = _f1_score(prediction, labels)
+            bleu = _bleu(prediction, labels)
             with self._lock():
                 self.metrics['f1'] += f1
                 self.metrics['f1_cnt'] += 1
+                if bleu is not None:
+                    self.metrics['bleu'] += bleu
+                    self.metrics['bleu_cnt'] += 1
 
         # Ranking metrics.
         self.update_ranking_metrics(observation, labels)
@@ -218,7 +265,7 @@ class Metrics(object):
         # User-reported metrics
         if 'metrics' in observation:
             for k, v in observation['metrics'].items():
-                if k not in ['correct', 'f1', 'hits@k']:
+                if k not in ['correct', 'f1', 'hits@k', 'bleu']:
                     if k in self.metrics_list:
                         with self._lock():
                             self.metrics[k] += v
@@ -247,7 +294,7 @@ class Metrics(object):
         # Report the metrics over all data seen so far.
         m = {}
         total = self.metrics['cnt']
-        m['total'] = total
+        m['exs'] = total
         if total > 0:
             if self.flags['print_prediction_metrics']:
                 m['accuracy'] = round_sigfigs(self.metrics['correct'] / max(1, self.metrics['correct_cnt']), 4)
